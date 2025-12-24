@@ -42,7 +42,7 @@ Frontend Developer specializing in React, JavaScript, and modern web technologie
             <div className="flex flex-col items-center md:items-start">
               <h3 className="text-white text-xl mb-4">Connect</h3>
               <div className="flex gap-6">
-                <a className="text-white p-3 text-2xl bg-[#2E2735] rounded-xl hover:bg-linear-to-r from-[#9E49C5] to-[#DC519B]" href="https://github.com/dashboard" target='_blank'>
+                <a className="text-white p-3 text-2xl bg-[#2E2735] rounded-xl hover:bg-linear-to-r from-[#9E49C5] to-[#DC519B]" href="https://github.com/hanan9876" target='_blank'>
                   <FaGithub />
                 </a>
                 <a className="text-white p-3 text-2xl bg-[#2E2735] rounded-xl hover:bg-linear-to-r from-[#9E49C5] to-[#DC519B]" href="https://www.linkedin.com/in/hanan-arshad-webdev/" target='_blank'>
