@@ -72,7 +72,7 @@ export const Hero = () => {
           </button>
 
           <a
-            href="/resume.pdf"
+            href="/resume1.pdf"
             download="Hanan_Resume.pdf"
             className="
               group
