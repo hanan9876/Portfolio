@@ -1,0 +1,190 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Animation system — dependency-free (CSS + IntersectionObserver)
+   ============================================================ */
+
+:root {
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --brand-from: #9e49c5;
+  --brand-to: #dc519b;
+}
+
+/* ---------- Scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 0.7s var(--ease-out-soft),
+    transform 0.7s var(--ease-out-soft);
+  will-change: opacity, transform;
+}
+.reveal.reveal-left {
+  transform: translateX(-48px);
+}
+.reveal.reveal-right {
+  transform: translateX(48px);
+}
+.reveal.reveal-scale {
+  transform: scale(0.92);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- One-shot entrance animations (on load) ---------- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.animate-fade-in-up {
+  opacity: 0;
+  animation: fadeInUp 0.9s var(--ease-out-soft) forwards;
+}
+.animate-fade-in {
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+}
+
+/* Stagger helpers (usable with reveal or entrance animations) */
+.delay-1 {
+  animation-delay: 0.1s;
+  transition-delay: 0.1s;
+}
+.delay-2 {
+  animation-delay: 0.25s;
+  transition-delay: 0.25s;
+}
+.delay-3 {
+  animation-delay: 0.4s;
+  transition-delay: 0.4s;
+}
+.delay-4 {
+  animation-delay: 0.55s;
+  transition-delay: 0.55s;
+}
+.delay-5 {
+  animation-delay: 0.7s;
+  transition-delay: 0.7s;
+}
+
+/* ---------- Floating gradient blobs (hero backdrop) ---------- */
+@keyframes blob {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(40px, -50px) scale(1.15);
+  }
+  66% {
+    transform: translate(-30px, 30px) scale(0.9);
+  }
+}
+.animate-blob {
+  animation: blob 14s ease-in-out infinite;
+}
+
+/* ---------- Floating (gentle bob) ---------- */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* ---------- Scroll-cue bounce ---------- */
+@keyframes bounceDown {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 1;
+  }
+}
+.animate-bounce-down {
+  animation: bounceDown 1.8s ease-in-out infinite;
+}
+
+/* ---------- Animated underline for nav links ---------- */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 2px;
+  width: 0;
+  border-radius: 2px;
+  background: linear-gradient(to right, var(--brand-from), var(--brand-to));
+  transition: width 0.3s var(--ease-out-soft);
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ---------- Reusable gradient glow on hover ---------- */
+.hover-glow {
+  transition:
+    transform 0.3s var(--ease-out-soft),
+    box-shadow 0.3s var(--ease-out-soft),
+    filter 0.3s var(--ease-out-soft);
+}
+.hover-glow:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 30px -8px rgba(158, 73, 197, 0.55);
+}
+
+/* Lift effect for cards */
+.card-lift {
+  transition:
+    transform 0.35s var(--ease-out-soft),
+    box-shadow 0.35s var(--ease-out-soft),
+    border-color 0.35s var(--ease-out-soft);
+}
+.card-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px -18px rgba(158, 73, 197, 0.5);
+}
+
+/* ---------- Respect reduced-motion preferences ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
